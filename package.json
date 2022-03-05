@@ -1,21 +1,28 @@
 {
-  "name": "ethereum-blocks",
-  "license": "UNLICENSED",
+  "name": "boba-blocks",
   "scripts": {
     "codegen": "graph codegen",
     "build": "graph build",
-    "deploy": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ blocklytics/ethereum-blocks",
-    "create-local": "graph create --node http://localhost:8020/ blocklytics/ethereum-blocks",
-    "remove-local": "graph remove --node http://localhost:8020/ blocklytics/ethereum-blocks",
-    "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 blocklytics/ethereum-blocks",
-    "deploy-rinkeby": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ blocklytics/rinkeby-blocks",
-    "deploy-kovan": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ blocklytics/kovan-blocks",
-    "deploy-goerli": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ blocklytics/goerli-blocks",
-    "deploy-ropsten": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ blocklytics/ropsten-blocks",
-    "deploy-poa": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ blocklytics/poa-core-blocks"
+    "prepare:boba:mainnet": "mustache config/boba-mainnet.json subgraph.template.yaml > subgraph.yaml",
+    "prepare:boba:rinkeby": "mustache config/boba-rinkeby.json subgraph.template.yaml > subgraph.yaml",
+    "create:boba:mainnet": "graph create --node https://graph.mainnet.boba.network:8020 shibui/boba-blocks",
+    "create:boba:rinkeby": "graph create --node https://graph.rinkeby.boba.network:8020 shibui/boba-blocks",
+    "create:local": "graph create --node http://localhost:8020/ shibui/boba-blocks",
+    "deploy:boba:mainnet": "graph deploy --ipfs https://graph.mainnet.boba.network:5001 --node https://graph.mainnet.boba.network:8020 shibui/boba-blocks",
+    "deploy:boba:rinkeby": "graph deploy --ipfs https://graph.rinkeby.boba.network:5001 --node https://graph.rinkeby.boba.network:8020 shibui/boba-blocks",
+    "deploy:local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 shibui/boba-blocks",
+    "remove:boba:mainnet": "graph remove --node https://graph.mainnet.boba.network:8020 shibui/boba-blocks",
+    "remove:boba:rinkeby": "graph remove --node https://graph.rinkeby.boba.network:8020 shibui/boba-blocks",
+    "remove:local": "graph remove --node http://localhost:8020/ shibui/boba-blocks"
+  },
+  "devDependencies": {
+    "mustache": "^4.2.0"
   },
   "dependencies": {
     "@graphprotocol/graph-cli": "^0.17.1",
     "@graphprotocol/graph-ts": "0.17.0"
+  },
+  "resolutions": {
+    "colors": "1.4.0"
   }
 }
